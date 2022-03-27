@@ -27,7 +27,7 @@ public class PriceHistory {
 
   private Double getPreviousPrice(LocalDate date) {
     Optional<LocalDate> previousDate =
-        priceByDate.keySet().stream().sorted().filter(d -> d.isBefore(date))
+        priceByDate.keySet().stream().filter(d -> d.isBefore(date))
             .reduce((first, last) -> last);
     return previousDate.isPresent() ? getPriceForDate(previousDate.get()) : 0;
   }

@@ -5,6 +5,7 @@ import com.nathangibson.portfolio.domain.PriceHistory;
 import com.nathangibson.portfolio.domain.Stock;
 import com.nathangibson.portfolio.entity.PriceHistoryEntity;
 import com.nathangibson.portfolio.entity.StockEntity;
+import com.nathangibson.portfolio.exception.StockNotFoundException;
 import com.nathangibson.portfolio.mapper.PriceHistoryMapper;
 import com.nathangibson.portfolio.repository.PriceHistoryRepository;
 import com.nathangibson.portfolio.repository.StockRepository;
@@ -32,7 +33,8 @@ public class PriceHistoryService {
   }
 
   public PriceHistory getPriceHistoryForStock(String ticker) {
-    StockEntity stockEntity = stockRepository.findByTicker(ticker);
+    StockEntity stockEntity = stockRepository.findByTicker(ticker)
+        .orElseThrow(() -> new StockNotFoundException());
     List<PriceHistoryEntity> priceHistoryEntities =
         priceHistoryRepository.findByStockId(stockEntity.getId());
     return priceHistoryMapper.mapPriceHistoryEntitiesToPriceHistory(
@@ -66,6 +68,8 @@ public class PriceHistoryService {
     }
 
     // starting at the earliest price, sum up all prices for each day
+
+    // TODO: handle quantity
     earliestPriceHistory.getEarliestDate()
         .datesUntil(dateService.getCurrentDate()).forEach(date -> {
           Double price =

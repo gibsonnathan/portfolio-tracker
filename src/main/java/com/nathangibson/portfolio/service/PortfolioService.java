@@ -4,6 +4,7 @@ import com.nathangibson.portfolio.domain.*;
 import com.nathangibson.portfolio.entity.PositionEntity;
 import com.nathangibson.portfolio.entity.StockEntity;
 import com.nathangibson.portfolio.entity.UserEntity;
+import com.nathangibson.portfolio.exception.StockNotFoundException;
 import com.nathangibson.portfolio.exception.UserNotFoundException;
 import com.nathangibson.portfolio.mapper.PositionMapper;
 import com.nathangibson.portfolio.mapper.StockMapper;
@@ -11,6 +12,7 @@ import com.nathangibson.portfolio.mapper.UserMapper;
 import com.nathangibson.portfolio.repository.PositionRepository;
 import com.nathangibson.portfolio.repository.StockRepository;
 import com.nathangibson.portfolio.repository.UserRepository;
+import com.nathangibson.portfolio.request.CreatePositionRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -64,5 +66,20 @@ public class PortfolioService {
     return portfolio;
   }
 
+  public PositionEntity addPositionToUsersPortfolio(String username,
+                                                    CreatePositionRequest createPositionRequest) {
+    UserEntity userEntity = userRepository.findByUsername(username)
+        .orElseThrow(() -> new UserNotFoundException());
+    StockEntity stockEntity =
+        stockRepository.findByTicker(createPositionRequest.getTicker())
+            .orElseThrow(() -> new StockNotFoundException());
+    PositionEntity positionEntity = new PositionEntity();
+    positionEntity.setUserId(userEntity.getId());
+    positionEntity.setStockId(stockEntity.getId());
+    positionEntity.setAverageCost(createPositionRequest.getAverageCost());
+    positionEntity.setQuantity(createPositionRequest.getQuantity());
+    positionRepository.save(positionEntity);
 
+    return positionEntity;
+  }
 }

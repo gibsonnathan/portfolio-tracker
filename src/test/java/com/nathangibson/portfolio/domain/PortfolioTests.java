@@ -44,7 +44,7 @@ public class PortfolioTests {
     List<Position> positions = portfolio.getPositions();
     assertTrue(positions.contains(position));
 
-    Map<LocalDate, Double> prices = portfolio.getPriceByDate();
+    Map<LocalDate, Double> prices = portfolio.getPriceByDateMap();
     assertEquals(123.0, prices.get(LocalDate.of(2022, 1, 1)));
   }
 
@@ -87,7 +87,7 @@ public class PortfolioTests {
     assertTrue(positions.contains(firstPosition));
     assertTrue(positions.contains(secondPosition));
 
-    Map<LocalDate, Double> prices = portfolio.getPriceByDate();
+    Map<LocalDate, Double> prices = portfolio.getPriceByDateMap();
     assertEquals(200.0, prices.get(LocalDate.of(2022, 1, 1)));
   }
 }

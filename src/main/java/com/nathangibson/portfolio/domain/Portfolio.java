@@ -1,6 +1,5 @@
 package com.nathangibson.portfolio.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nathangibson.portfolio.entity.PriceHistoryEntity;
 import com.nathangibson.portfolio.service.PriceHistoryService;
 import lombok.Data;
@@ -12,7 +11,7 @@ import java.util.*;
 public class Portfolio {
   private User user;
   private List<Position> positions = new ArrayList<>();
-  private Map<LocalDate, Double> priceByDate = new TreeMap<>();
+  private Map<LocalDate, Double> priceByDateMap = new TreeMap<>();
 
   public boolean addPosition(Position position,
                              PriceHistoryService priceHistoryService) {
@@ -23,23 +22,22 @@ public class Portfolio {
     priceHistoryEntities.forEach(priceHistoryEntity -> {
       LocalDate closeDate = priceHistoryEntity.getCloseDate();
       Double price = priceHistoryEntity.getPrice();
-      if (priceByDate.containsKey(closeDate)) {
-        Double current = priceByDate.get(closeDate);
-        priceByDate.put(closeDate, current + (position.getQuantity() * price));
+      if (priceByDateMap.containsKey(closeDate)) {
+        Double current = priceByDateMap.get(closeDate);
+        priceByDateMap.put(closeDate,
+            current + (position.getQuantity() * price));
       } else {
-        priceByDate.put(closeDate, position.getQuantity() * price);
+        priceByDateMap.put(closeDate, position.getQuantity() * price);
       }
     });
     return positions.add(position);
   }
 
-  @JsonIgnore
   public List<Position> getPositions() {
     return Collections.unmodifiableList(positions);
   }
 
-  @JsonIgnore
-  public Map<LocalDate, Double> getPrices() {
-    return Collections.unmodifiableMap(priceByDate);
+  public Map<LocalDate, Double> getPriceByDateMap() {
+    return Collections.unmodifiableMap(priceByDateMap);
   }
 }

@@ -59,7 +59,7 @@ public class PortfolioService {
       Stock stock = stockMapper.mapStockEntityToStock(stockEntity);
       Transaction transaction =
           transactionMapper.mapTransactionEntityToTransaction(transactionEntity, stock);
-      portfolio.addPosition(transaction, priceHistoryService);
+      portfolio.addTransaction(transaction, priceHistoryService);
     });
     portfolio.setUser(user);
 

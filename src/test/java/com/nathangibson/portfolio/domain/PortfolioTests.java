@@ -23,7 +23,7 @@ public class PortfolioTests {
   }
 
   @Test
-  public void canAddPositionToPortfolio() {
+  public void canAddTransactionToPortfolio() {
     Portfolio portfolio = new Portfolio();
     Transaction transaction = new Transaction();
     Stock stock = new Stock();
@@ -37,7 +37,7 @@ public class PortfolioTests {
     Mockito.when(priceHistoryService.getPriceHistoryForStock("test"))
         .thenReturn(List.of(priceHistoryEntity));
 
-    portfolio.addPosition(transaction, priceHistoryService);
+    portfolio.addTransaction(transaction, priceHistoryService);
 
     List<Transaction> transactions = portfolio.getTransactions();
     assertTrue(transactions.contains(transaction));
@@ -47,7 +47,7 @@ public class PortfolioTests {
   }
 
   @Test
-  public void canAddMultiplePositions() {
+  public void canAddMultipleTransactions() {
     Portfolio portfolio = new Portfolio();
 
     Transaction firstTransaction = new Transaction();
@@ -74,8 +74,8 @@ public class PortfolioTests {
     Mockito.when(priceHistoryService.getPriceHistoryForStock("y"))
         .thenReturn(List.of(priceHistoryEntityForY));
 
-    portfolio.addPosition(firstTransaction, priceHistoryService);
-    portfolio.addPosition(secondTransaction, priceHistoryService);
+    portfolio.addTransaction(firstTransaction, priceHistoryService);
+    portfolio.addTransaction(secondTransaction, priceHistoryService);
 
     List<Transaction> transactions = portfolio.getTransactions();
     assertTrue(transactions.contains(firstTransaction));

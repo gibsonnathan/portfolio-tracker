@@ -20,7 +20,7 @@ INSERT INTO price_history (id, stock_id, close_date, price) VALUES (7, 1, '2017-
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (8, 1, '2017-08-01', 150.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (9, 1, '2017-09-01', 160.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (10, 1, '2017-10-01', 170.15);
-INSERT INTO price_history (id, stock_id, close_date, price) VALUES (11, 1, '2017-1-01', 180.15);
+INSERT INTO price_history (id, stock_id, close_date, price) VALUES (11, 1, '2017-11-01', 180.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (12, 1, '2017-12-01', 160.15);
 
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (13, 1, '2018-01-01', 110.15);
@@ -33,7 +33,7 @@ INSERT INTO price_history (id, stock_id, close_date, price) VALUES (19, 1, '2018
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (20, 1, '2018-08-01', 120.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (21, 1, '2018-09-01', 110.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (22, 1, '2018-10-01', 170.15);
-INSERT INTO price_history (id, stock_id, close_date, price) VALUES (23, 1, '2018-1-01', 190.15);
+INSERT INTO price_history (id, stock_id, close_date, price) VALUES (23, 1, '2018-11-01', 190.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (24, 1, '2018-12-01', 130.15);
 
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (25, 1, '2019-01-01', 110.15);
@@ -46,7 +46,7 @@ INSERT INTO price_history (id, stock_id, close_date, price) VALUES (31, 1, '2019
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (32, 1, '2019-08-01', 120.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (33, 1, '2019-09-01', 110.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (34, 1, '2019-10-01', 170.15);
-INSERT INTO price_history (id, stock_id, close_date, price) VALUES (35, 1, '2019-1-01', 190.15);
+INSERT INTO price_history (id, stock_id, close_date, price) VALUES (35, 1, '2019-11-01', 190.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (36, 1, '2019-12-01', 130.15);
 
 -- baba
@@ -60,7 +60,7 @@ INSERT INTO price_history (id, stock_id, close_date, price) VALUES (43, 2, '2017
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (44, 2, '2017-08-01', 101.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (45, 2, '2017-09-01', 102.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (46, 2, '2017-10-01', 103.15);
-INSERT INTO price_history (id, stock_id, close_date, price) VALUES (47, 2, '2017-1-01', 105.15);
+INSERT INTO price_history (id, stock_id, close_date, price) VALUES (47, 2, '2017-11-01', 105.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (48, 2, '2017-12-01', 112.15);
 
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (49, 2, '2018-01-01', 93.15);
@@ -73,7 +73,7 @@ INSERT INTO price_history (id, stock_id, close_date, price) VALUES (55, 2, '2018
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (56, 2, '2018-08-01', 91.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (57, 2, '2018-09-01', 92.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (58, 2, '2018-10-01', 93.15);
-INSERT INTO price_history (id, stock_id, close_date, price) VALUES (59, 2, '2018-1-01', 94.15);
+INSERT INTO price_history (id, stock_id, close_date, price) VALUES (59, 2, '2018-11-01', 94.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (60, 2, '2018-12-01', 95.15);
 
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (61, 2, '2019-01-01', 93.15);
@@ -86,7 +86,7 @@ INSERT INTO price_history (id, stock_id, close_date, price) VALUES (67, 2, '2019
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (68, 2, '2019-08-01', 100.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (69, 2, '2019-09-01', 101.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (70, 2, '2019-10-01', 102.15);
-INSERT INTO price_history (id, stock_id, close_date, price) VALUES (71, 2, '2019-1-01', 103.15);
+INSERT INTO price_history (id, stock_id, close_date, price) VALUES (71, 2, '2019-11-01', 103.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (72, 2, '2019-12-01', 104.15);
 
 -- pltr
@@ -100,7 +100,7 @@ INSERT INTO price_history (id, stock_id, close_date, price) VALUES (79, 3, '2017
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (80, 3, '2017-08-01', 150.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (81, 3, '2017-09-01', 160.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (82, 3, '2017-10-01', 170.15);
-INSERT INTO price_history (id, stock_id, close_date, price) VALUES (83, 3, '2017-1-01', 180.15);
+INSERT INTO price_history (id, stock_id, close_date, price) VALUES (83, 3, '2017-11-01', 180.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (84, 3, '2017-12-01', 160.15);
 
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (85, 3, '2018-01-01', 110.15);
@@ -113,7 +113,7 @@ INSERT INTO price_history (id, stock_id, close_date, price) VALUES (91, 3, '2018
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (92, 3, '2018-08-01', 120.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (93, 3, '2018-09-01', 110.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (94, 3, '2018-10-01', 170.15);
-INSERT INTO price_history (id, stock_id, close_date, price) VALUES (95, 3, '2018-1-01', 190.15);
+INSERT INTO price_history (id, stock_id, close_date, price) VALUES (95, 3, '2018-11-01', 190.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (96, 3, '2018-12-01', 130.15);
 
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (97, 3, '2019-01-01', 110.15);
@@ -126,7 +126,7 @@ INSERT INTO price_history (id, stock_id, close_date, price) VALUES (103, 3, '201
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (104, 3, '2019-08-01', 120.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (105, 3, '2019-09-01', 110.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (106, 3, '2019-10-01', 170.15);
-INSERT INTO price_history (id, stock_id, close_date, price) VALUES (107, 3, '2019-1-01', 190.15);
+INSERT INTO price_history (id, stock_id, close_date, price) VALUES (107, 3, '2019-11-01', 190.15);
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (108, 3, '2019-12-01', 130.15);
 
 

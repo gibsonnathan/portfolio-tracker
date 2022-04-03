@@ -1,6 +1,9 @@
 package com.nathangibson.portfolio.service;
 
-import com.nathangibson.portfolio.domain.*;
+import com.nathangibson.portfolio.domain.Portfolio;
+import com.nathangibson.portfolio.domain.Position;
+import com.nathangibson.portfolio.domain.Stock;
+import com.nathangibson.portfolio.domain.User;
 import com.nathangibson.portfolio.entity.PositionEntity;
 import com.nathangibson.portfolio.entity.StockEntity;
 import com.nathangibson.portfolio.entity.UserEntity;
@@ -56,11 +59,8 @@ public class PortfolioService {
       Stock stock = stockMapper.mapStockEntityToStock(stockEntity);
       Position position =
           positionMapper.mapPositionEntityToPosition(positionEntity, stock);
-      portfolio.addPosition(position);
+      portfolio.addPosition(position, priceHistoryService);
     });
-    PriceHistory priceHistory =
-        priceHistoryService.getPriceHistoryForPortfolio(portfolio);
-    portfolio.setPriceHistory(priceHistory);
     portfolio.setUser(user);
 
     return portfolio;

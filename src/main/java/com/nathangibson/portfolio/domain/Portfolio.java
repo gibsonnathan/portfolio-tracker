@@ -1,5 +1,6 @@
 package com.nathangibson.portfolio.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nathangibson.portfolio.entity.PriceHistoryEntity;
 import com.nathangibson.portfolio.service.PriceHistoryService;
 import lombok.Data;
@@ -32,10 +33,12 @@ public class Portfolio {
     return positions.add(position);
   }
 
+  @JsonIgnore
   public List<Position> getPositions() {
     return Collections.unmodifiableList(positions);
   }
 
+  @JsonIgnore
   public Map<LocalDate, Double> getPrices() {
     return Collections.unmodifiableMap(priceByDate);
   }

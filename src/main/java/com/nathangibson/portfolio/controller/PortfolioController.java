@@ -15,7 +15,7 @@ public class PortfolioController {
     this.portfolioService = portfolioService;
   }
 
-  @GetMapping("/portfolio/{username}")
+  @GetMapping("/portfolios/{username}")
   public PortfolioResponse getPortfolioForUser(@PathVariable String username) {
     Portfolio portfolio = portfolioService.getPortfolioForUsername(username);
     PortfolioResponse portfolioResponse = new PortfolioResponse();
@@ -25,7 +25,7 @@ public class PortfolioController {
     return portfolioResponse;
   }
 
-  @PostMapping("/portfolio/{username}/transaction")
+  @PostMapping("/portfolios/{username}/transactions")
   public PortfolioResponse addPositionToPortfolio(@PathVariable String username,
                                                   @RequestBody
                                                       AddTransactionRequest addTransactionRequest) {

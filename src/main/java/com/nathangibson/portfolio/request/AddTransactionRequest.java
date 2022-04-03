@@ -2,10 +2,12 @@ package com.nathangibson.portfolio.request;
 
 import lombok.Data;
 
+import java.time.Instant;
+
 @Data
-public class CreatePositionRequest {
+public class AddTransactionRequest {
 
   private String ticker;
   private Double quantity;
-  private Double averageCost;
+  private Instant purchaseTimestamp;
 }

@@ -25,12 +25,12 @@ CREATE TABLE users (
    PRIMARY KEY(id)
 );
 
-CREATE TABLE positions(
+CREATE TABLE transactions(
     id IDENTITY NOT NULL AUTO_INCREMENT,
     user_id INT NOT NULL,
     stock_id INT NOT NULL,
     quantity NUMERIC NOT NULL,
-    average_cost NUMERIC NOT NULL,
+    purchase_timestamp TIMESTAMP NOT NULL,
     row_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     row_modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(id),

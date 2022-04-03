@@ -5,9 +5,9 @@ INSERT INTO stocks (id, ticker) VALUES(1, 'msft');
 INSERT INTO stocks (id, ticker) VALUES(2, 'baba');
 INSERT INTO stocks (id, ticker) VALUES(3, 'pltr');
 
-INSERT INTO positions (id, user_id, stock_id, quantity, average_cost) VALUES (1, 1, 1, 45.3, 130.20);
-INSERT INTO positions (id, user_id, stock_id, quantity, average_cost) VALUES (2, 1, 2, 50.6, 150.32);
-INSERT INTO positions (id, user_id, stock_id, quantity, average_cost) VALUES (3, 2, 3, 500, 13.43);
+INSERT INTO transactions (id, user_id, stock_id, quantity, purchase_timestamp) VALUES (1, 1, 1, 45.3, '2020-01-17 18:47:52.69');
+INSERT INTO transactions (id, user_id, stock_id, quantity, purchase_timestamp) VALUES (2, 1, 2, 50.6, '2020-02-17 18:47:52.69');
+INSERT INTO transactions (id, user_id, stock_id, quantity, purchase_timestamp) VALUES (3, 2, 3, 500, '2020-03-17 18:47:52.69');
 
 -- msft
 INSERT INTO price_history (id, stock_id, close_date, price) VALUES (1, 1, '2017-01-01', 130.15);

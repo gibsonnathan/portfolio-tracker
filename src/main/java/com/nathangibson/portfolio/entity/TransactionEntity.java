@@ -5,15 +5,16 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.Instant;
 
 @Entity
 @Data
-@Table(name = "positions")
-public class PositionEntity {
+@Table(name = "transactions")
+public class TransactionEntity {
   @Id
   private long id;
   private long userId;
   private long stockId;
   private double quantity;
-  private double averageCost;
+  private Instant purchaseTimestamp;
 }

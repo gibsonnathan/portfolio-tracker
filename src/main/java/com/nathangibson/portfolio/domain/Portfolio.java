@@ -10,12 +10,12 @@ import java.util.*;
 @Data
 public class Portfolio {
   private User user;
-  private List<Position> positions = new ArrayList<>();
+  private List<Transaction> transactions = new ArrayList<>();
   private Map<LocalDate, Double> priceByDateMap = new TreeMap<>();
 
-  public boolean addPosition(Position position,
+  public boolean addPosition(Transaction transaction,
                              PriceHistoryService priceHistoryService) {
-    Stock stock = position.getStock();
+    Stock stock = transaction.getStock();
     String ticker = stock.getTicker();
     List<PriceHistoryEntity> priceHistoryEntities =
         priceHistoryService.getPriceHistoryForStock(ticker);
@@ -25,16 +25,16 @@ public class Portfolio {
       if (priceByDateMap.containsKey(closeDate)) {
         Double current = priceByDateMap.get(closeDate);
         priceByDateMap.put(closeDate,
-            current + (position.getQuantity() * price));
+            current + (transaction.getQuantity() * price));
       } else {
-        priceByDateMap.put(closeDate, position.getQuantity() * price);
+        priceByDateMap.put(closeDate, transaction.getQuantity() * price);
       }
     });
-    return positions.add(position);
+    return transactions.add(transaction);
   }
 
-  public List<Position> getPositions() {
-    return Collections.unmodifiableList(positions);
+  public List<Transaction> getTransactions() {
+    return Collections.unmodifiableList(transactions);
   }
 
   public Map<LocalDate, Double> getPriceByDateMap() {

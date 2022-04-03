@@ -1,7 +1,7 @@
 package com.nathangibson.portfolio.controller;
 
 import com.nathangibson.portfolio.domain.Portfolio;
-import com.nathangibson.portfolio.request.CreatePositionRequest;
+import com.nathangibson.portfolio.request.AddTransactionRequest;
 import com.nathangibson.portfolio.response.PortfolioResponse;
 import com.nathangibson.portfolio.service.PortfolioService;
 import org.springframework.web.bind.annotation.*;
@@ -25,12 +25,12 @@ public class PortfolioController {
     return portfolioResponse;
   }
 
-  @PostMapping("/portfolio/{username}/positions")
+  @PostMapping("/portfolio/{username}/transaction")
   public PortfolioResponse addPositionToPortfolio(@PathVariable String username,
                                                   @RequestBody
-                                                      CreatePositionRequest createPositionRequest) {
+                                                      AddTransactionRequest addTransactionRequest) {
     portfolioService.addPositionToUsersPortfolio(username,
-        createPositionRequest);
+        addTransactionRequest);
     Portfolio portfolio = portfolioService.getPortfolioForUsername(username);
     PortfolioResponse portfolioResponse = new PortfolioResponse();
     portfolioResponse.setPortfolio(portfolio);

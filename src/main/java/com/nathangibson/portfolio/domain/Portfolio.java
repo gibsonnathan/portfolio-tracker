@@ -23,8 +23,9 @@ public class Portfolio {
         priceHistoryService.getPriceHistoryForStock(ticker);
     priceHistoryEntities.forEach(priceHistoryEntity -> {
       Instant priceHistoryTimestamp = priceHistoryEntity.getTimestamp();
-      // TODO: handle whether or not the stock was owned at the time of the
-      //  price
+      if (!transactionTimestamp.isAfter(priceHistoryTimestamp)){
+        return;
+      }
       Double price = priceHistoryEntity.getPrice();
       if (priceByInstantMap.containsKey(priceHistoryTimestamp)) {
         Double current = priceByInstantMap.get(priceHistoryTimestamp);

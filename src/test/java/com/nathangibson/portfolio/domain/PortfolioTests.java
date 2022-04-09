@@ -12,8 +12,7 @@ import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PortfolioTests {
 
@@ -96,5 +95,31 @@ public class PortfolioTests {
     Map<Instant, Double> prices = portfolio.getPriceByInstantMap();
     assertEquals(200.0, prices.get(
         LocalDate.of(2022, 1, 1).atStartOfDay().toInstant(ZoneOffset.UTC)));
+  }
+
+  @Test
+  public void doNotIncludePriceBeforeTransaction() {
+    Portfolio portfolio = new Portfolio();
+
+    Transaction transaction = new Transaction();
+    Stock firstStock = new Stock();
+    firstStock.setTicker("x");
+    transaction.setQuantity(1);
+    transaction.setStock(firstStock);
+    transaction.setTimestamp(
+        LocalDate.of(2022, 1, 2).atStartOfDay().toInstant(ZoneOffset.UTC));
+
+    PriceHistoryEntity priceHistory = new PriceHistoryEntity();
+    priceHistory.setPrice(100.0);
+    priceHistory.setTimestamp(
+        LocalDate.of(2022, 1, 3).atStartOfDay().toInstant(ZoneOffset.UTC));
+    Mockito.when(priceHistoryService.getPriceHistoryForStock("x"))
+        .thenReturn(List.of(priceHistory));
+
+    portfolio.addTransaction(transaction, priceHistoryService);
+
+    Map<Instant, Double> prices = portfolio.getPriceByInstantMap();
+    assertNull(prices.get(
+        LocalDate.of(2022, 1, 2).atStartOfDay().toInstant(ZoneOffset.UTC)));
   }
 }

@@ -2,10 +2,11 @@ package com.nathangibson.portfolio.entity;
 
 import lombok.Data;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.LocalDate;
+import java.time.Instant;
 
 @Entity
 @Data
@@ -14,6 +15,7 @@ public class PriceHistoryEntity {
   @Id
   private long id;
   private long stockId;
-  private LocalDate closeDate;
+  @Column(name = "ts")
+  private Instant timestamp;
   private Double price;
 }

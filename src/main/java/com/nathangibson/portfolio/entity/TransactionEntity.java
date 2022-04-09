@@ -2,6 +2,7 @@ package com.nathangibson.portfolio.entity;
 
 import lombok.Data;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -16,5 +17,7 @@ public class TransactionEntity {
   private long userId;
   private long stockId;
   private double quantity;
-  private Instant purchaseTimestamp;
+  @Column(name = "ts")
+  private Instant timestamp;
+  private String type;
 }

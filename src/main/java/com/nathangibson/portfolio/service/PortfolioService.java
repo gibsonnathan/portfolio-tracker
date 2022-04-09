@@ -1,16 +1,16 @@
 package com.nathangibson.portfolio.service;
 
 import com.nathangibson.portfolio.domain.Portfolio;
-import com.nathangibson.portfolio.domain.Transaction;
 import com.nathangibson.portfolio.domain.Stock;
+import com.nathangibson.portfolio.domain.Transaction;
 import com.nathangibson.portfolio.domain.User;
-import com.nathangibson.portfolio.entity.TransactionEntity;
 import com.nathangibson.portfolio.entity.StockEntity;
+import com.nathangibson.portfolio.entity.TransactionEntity;
 import com.nathangibson.portfolio.entity.UserEntity;
 import com.nathangibson.portfolio.exception.StockNotFoundException;
 import com.nathangibson.portfolio.exception.UserNotFoundException;
-import com.nathangibson.portfolio.mapper.TransactionMapper;
 import com.nathangibson.portfolio.mapper.StockMapper;
+import com.nathangibson.portfolio.mapper.TransactionMapper;
 import com.nathangibson.portfolio.mapper.UserMapper;
 import com.nathangibson.portfolio.repository.PositionRepository;
 import com.nathangibson.portfolio.repository.StockRepository;
@@ -58,7 +58,8 @@ public class PortfolioService {
           stockRepository.getById(transactionEntity.getStockId());
       Stock stock = stockMapper.mapStockEntityToStock(stockEntity);
       Transaction transaction =
-          transactionMapper.mapTransactionEntityToTransaction(transactionEntity, stock);
+          transactionMapper.mapTransactionEntityToTransaction(transactionEntity,
+              stock);
       portfolio.addTransaction(transaction, priceHistoryService);
     });
     portfolio.setUser(user);
@@ -77,7 +78,7 @@ public class PortfolioService {
     transactionEntity.setUserId(userEntity.getId());
     transactionEntity.setStockId(stockEntity.getId());
     transactionEntity.setQuantity(addTransactionRequest.getQuantity());
-    transactionEntity.setPurchaseTimestamp(
+    transactionEntity.setTimestamp(
         addTransactionRequest.getPurchaseTimestamp());
     positionRepository.save(transactionEntity);
 

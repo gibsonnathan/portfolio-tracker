@@ -9,7 +9,7 @@ CREATE TABLE stocks (
 CREATE TABLE price_history (
     id IDENTITY NOT NULL AUTO_INCREMENT,
     stock_id INT NOT NULL,
-    close_date DATE,
+    ts TIMESTAMP NOT NULL,
     price NUMERIC,
     row_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     row_modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -27,10 +27,11 @@ CREATE TABLE users (
 
 CREATE TABLE transactions(
     id IDENTITY NOT NULL AUTO_INCREMENT,
+    type VARCHAR(50),
     user_id INT NOT NULL,
     stock_id INT NOT NULL,
     quantity NUMERIC NOT NULL,
-    purchase_timestamp TIMESTAMP NOT NULL,
+    ts TIMESTAMP NOT NULL,
     row_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     row_modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(id),

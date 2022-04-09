@@ -6,7 +6,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Map;
 
@@ -30,10 +32,13 @@ public class PortfolioTests {
     stock.setTicker("test");
     transaction.setQuantity(1);
     transaction.setStock(stock);
+    transaction.setTimestamp(
+        LocalDate.of(2022, 1, 2).atStartOfDay().toInstant(ZoneOffset.UTC));
 
     PriceHistoryEntity priceHistoryEntity = new PriceHistoryEntity();
     priceHistoryEntity.setPrice(123.0);
-    priceHistoryEntity.setCloseDate(LocalDate.of(2022, 1, 1));
+    priceHistoryEntity.setTimestamp(
+        LocalDate.of(2022, 1, 1).atStartOfDay().toInstant(ZoneOffset.UTC));
     Mockito.when(priceHistoryService.getPriceHistoryForStock("test"))
         .thenReturn(List.of(priceHistoryEntity));
 
@@ -42,8 +47,9 @@ public class PortfolioTests {
     List<Transaction> transactions = portfolio.getTransactions();
     assertTrue(transactions.contains(transaction));
 
-    Map<LocalDate, Double> prices = portfolio.getPriceByDateMap();
-    assertEquals(123.0, prices.get(LocalDate.of(2022, 1, 1)));
+    Map<Instant, Double> prices = portfolio.getPriceByInstantMap();
+    assertEquals(123.0, prices.get(
+        LocalDate.of(2022, 1, 1).atStartOfDay().toInstant(ZoneOffset.UTC)));
   }
 
   @Test
@@ -55,22 +61,28 @@ public class PortfolioTests {
     firstStock.setTicker("x");
     firstTransaction.setQuantity(1);
     firstTransaction.setStock(firstStock);
+    firstTransaction.setTimestamp(
+        LocalDate.of(2022, 1, 2).atStartOfDay().toInstant(ZoneOffset.UTC));
 
     Transaction secondTransaction = new Transaction();
     Stock secondStock = new Stock();
     secondStock.setTicker("y");
     secondTransaction.setQuantity(1);
     secondTransaction.setStock(secondStock);
+    secondTransaction.setTimestamp(
+        LocalDate.of(2022, 1, 2).atStartOfDay().toInstant(ZoneOffset.UTC));
 
     PriceHistoryEntity priceHistoryEntityForX = new PriceHistoryEntity();
     priceHistoryEntityForX.setPrice(100.0);
-    priceHistoryEntityForX.setCloseDate(LocalDate.of(2022, 1, 1));
+    priceHistoryEntityForX.setTimestamp(
+        LocalDate.of(2022, 1, 1).atStartOfDay().toInstant(ZoneOffset.UTC));
     Mockito.when(priceHistoryService.getPriceHistoryForStock("x"))
         .thenReturn(List.of(priceHistoryEntityForX));
 
     PriceHistoryEntity priceHistoryEntityForY = new PriceHistoryEntity();
     priceHistoryEntityForY.setPrice(100.0);
-    priceHistoryEntityForY.setCloseDate(LocalDate.of(2022, 1, 1));
+    priceHistoryEntityForY.setTimestamp(
+        LocalDate.of(2022, 1, 1).atStartOfDay().toInstant(ZoneOffset.UTC));
     Mockito.when(priceHistoryService.getPriceHistoryForStock("y"))
         .thenReturn(List.of(priceHistoryEntityForY));
 
@@ -81,7 +93,8 @@ public class PortfolioTests {
     assertTrue(transactions.contains(firstTransaction));
     assertTrue(transactions.contains(secondTransaction));
 
-    Map<LocalDate, Double> prices = portfolio.getPriceByDateMap();
-    assertEquals(200.0, prices.get(LocalDate.of(2022, 1, 1)));
+    Map<Instant, Double> prices = portfolio.getPriceByInstantMap();
+    assertEquals(200.0, prices.get(
+        LocalDate.of(2022, 1, 1).atStartOfDay().toInstant(ZoneOffset.UTC)));
   }
 }

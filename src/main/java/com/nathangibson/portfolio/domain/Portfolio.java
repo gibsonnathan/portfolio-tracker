@@ -4,33 +4,35 @@ import com.nathangibson.portfolio.entity.PriceHistoryEntity;
 import com.nathangibson.portfolio.service.PriceHistoryService;
 import lombok.Data;
 
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.*;
 
 @Data
 public class Portfolio {
   private User user;
   private List<Transaction> transactions = new ArrayList<>();
-  private Map<LocalDate, Double> priceByDateMap = new TreeMap<>();
+  private Map<Instant, Double> priceByInstantMap = new TreeMap<>();
 
   public boolean addTransaction(Transaction transaction,
-                             PriceHistoryService priceHistoryService) {
+                                PriceHistoryService priceHistoryService) {
+    // TODO: handle sell transaction
     Stock stock = transaction.getStock();
     String ticker = stock.getTicker();
+    Instant transactionTimestamp = transaction.getTimestamp();
     List<PriceHistoryEntity> priceHistoryEntities =
         priceHistoryService.getPriceHistoryForStock(ticker);
-    // TODO: verify this is correct after moving to transaction approach --
-    //  only need to consider adding price if transaction occurred after
-    //  close date
     priceHistoryEntities.forEach(priceHistoryEntity -> {
-      LocalDate closeDate = priceHistoryEntity.getCloseDate();
+      Instant priceHistoryTimestamp = priceHistoryEntity.getTimestamp();
+      // TODO: handle whether or not the stock was owned at the time of the
+      //  price
       Double price = priceHistoryEntity.getPrice();
-      if (priceByDateMap.containsKey(closeDate)) {
-        Double current = priceByDateMap.get(closeDate);
-        priceByDateMap.put(closeDate,
+      if (priceByInstantMap.containsKey(priceHistoryTimestamp)) {
+        Double current = priceByInstantMap.get(priceHistoryTimestamp);
+        priceByInstantMap.put(priceHistoryTimestamp,
             current + (transaction.getQuantity() * price));
       } else {
-        priceByDateMap.put(closeDate, transaction.getQuantity() * price);
+        priceByInstantMap.put(priceHistoryTimestamp,
+            transaction.getQuantity() * price);
       }
     });
     return transactions.add(transaction);
@@ -40,7 +42,7 @@ public class Portfolio {
     return Collections.unmodifiableList(transactions);
   }
 
-  public Map<LocalDate, Double> getPriceByDateMap() {
-    return Collections.unmodifiableMap(priceByDateMap);
+  public Map<Instant, Double> getPriceByInstantMap() {
+    return Collections.unmodifiableMap(priceByInstantMap);
   }
 }

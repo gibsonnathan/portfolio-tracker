@@ -29,7 +29,7 @@ public class PortfolioController {
   public PortfolioResponse addPositionToPortfolio(@PathVariable String username,
                                                   @RequestBody
                                                       AddTransactionRequest addTransactionRequest) {
-    portfolioService.addPositionToUsersPortfolio(username,
+    portfolioService.addTransactionToUsersPortfolio(username,
         addTransactionRequest);
     Portfolio portfolio = portfolioService.getPortfolioForUsername(username);
     PortfolioResponse portfolioResponse = new PortfolioResponse();

@@ -67,8 +67,8 @@ public class PortfolioService {
     return portfolio;
   }
 
-  public TransactionEntity addPositionToUsersPortfolio(String username,
-                                                       AddTransactionRequest addTransactionRequest) {
+  public TransactionEntity addTransactionToUsersPortfolio(String username,
+                                                          AddTransactionRequest addTransactionRequest) {
     UserEntity userEntity = userRepository.findByUsername(username)
         .orElseThrow(() -> new UserNotFoundException());
     StockEntity stockEntity =

@@ -1,49 +1,64 @@
 package com.nathangibson.portfolio.domain;
 
-import com.nathangibson.portfolio.entity.PriceHistoryEntity;
-import com.nathangibson.portfolio.service.PriceHistoryService;
 import lombok.Data;
 
 import java.time.Instant;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Data
 public class Portfolio {
-  private User user;
-  private List<Transaction> transactions = new ArrayList<>();
-  private Map<Instant, Double> priceByInstantMap = new TreeMap<>();
+  private Map<Instant, List<Holding>> holdingsByInstant = new TreeMap<>();
 
-  public boolean addTransaction(Transaction transaction,
-                                PriceHistoryService priceHistoryService) {
-    // TODO: handle sell transaction
-    Stock stock = transaction.getStock();
-    String ticker = stock.getTicker();
-    Instant transactionTimestamp = transaction.getTimestamp();
-    List<PriceHistoryEntity> priceHistoryEntities =
-        priceHistoryService.getPriceHistoryForStock(ticker);
-    priceHistoryEntities.forEach(priceHistoryEntity -> {
-      Instant priceHistoryTimestamp = priceHistoryEntity.getTimestamp();
-      if (!transactionTimestamp.isAfter(priceHistoryTimestamp)){
-        return;
-      }
-      Double price = priceHistoryEntity.getPrice();
-      if (priceByInstantMap.containsKey(priceHistoryTimestamp)) {
-        Double current = priceByInstantMap.get(priceHistoryTimestamp);
-        priceByInstantMap.put(priceHistoryTimestamp,
-            current + (transaction.getQuantity() * price));
-      } else {
-        priceByInstantMap.put(priceHistoryTimestamp,
-            transaction.getQuantity() * price);
-      }
-    });
-    return transactions.add(transaction);
+  public void addBuyTransaction(Transaction transaction) {
+    Optional<Instant> optionalPreviousInstant =
+        getPreviousHoldingsInstant(transaction.getTimestamp());
+    Holding holding = new Holding();
+    holding.setQuantity(transaction.getQuantity());
+    holding.setStockId(transaction.getStockId());
+
+    if (optionalPreviousInstant.isEmpty()) {
+      holdingsByInstant.put(transaction.getTimestamp(), List.of(holding));
+      return;
+    }
+
+    Instant previousInstant = optionalPreviousInstant.get();
+    List<Holding> holdings = holdingsByInstant.get(previousInstant);
+    List<Holding> newHoldings = new ArrayList<>(holdings);
+    newHoldings.add(holding);
+    holdingsByInstant.put(transaction.getTimestamp(), newHoldings);
   }
 
-  public List<Transaction> getTransactions() {
-    return Collections.unmodifiableList(transactions);
+  public void addSellTransaction(Transaction transaction) {
+    // TODO
   }
 
-  public Map<Instant, Double> getPriceByInstantMap() {
-    return Collections.unmodifiableMap(priceByInstantMap);
+  public Map<Instant, List<Holding>> getHoldingsByInstant() {
+    return Collections.unmodifiableMap(holdingsByInstant);
+  }
+
+  private Optional<Instant> getPreviousHoldingsInstant(Instant instant) {
+    List<Instant> instants = holdingsByInstant.keySet().stream().sorted()
+        .collect(Collectors.toList());
+
+    if (instants.contains(instant)) {
+      return Optional.of(instant);
+    }
+
+    if (instants.size() == 0) {
+      return Optional.empty();
+    }
+
+    if (instants.size() == 1 && instants.get(0).isBefore(instant)) {
+      return Optional.of(instants.get(0));
+    }
+
+    for (int i = 1; i < instants.size(); i++) {
+      if (instants.get(i).isAfter(instant) &&
+          instants.get(i - 1).isBefore(instant)) {
+        return Optional.of(instants.get(i));
+      }
+    }
+    return Optional.empty();
   }
 }

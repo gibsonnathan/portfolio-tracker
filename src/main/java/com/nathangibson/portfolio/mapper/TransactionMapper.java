@@ -9,12 +9,13 @@ import org.springframework.stereotype.Component;
 public class TransactionMapper {
 
   public Transaction mapTransactionEntityToTransaction(
-      TransactionEntity transactionEntity, Stock stock) {
+      TransactionEntity transactionEntity) {
     Transaction transaction = new Transaction();
-    transaction.setStock(stock);
+    transaction.setStockId(transactionEntity.getStockId());
     transaction.setQuantity(transactionEntity.getQuantity());
     transaction.setTimestamp(transactionEntity.getTimestamp());
     transaction.setType(transactionEntity.getType());
+    transaction.setPrice(transactionEntity.getPrice());
     return transaction;
   }
 }

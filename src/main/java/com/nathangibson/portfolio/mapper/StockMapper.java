@@ -10,6 +10,7 @@ public class StockMapper {
   public Stock mapStockEntityToStock(StockEntity stockEntity) {
     Stock stock = new Stock();
     stock.setTicker(stockEntity.getTicker());
+    stock.setId(stock.getId());
     return stock;
   }
 }

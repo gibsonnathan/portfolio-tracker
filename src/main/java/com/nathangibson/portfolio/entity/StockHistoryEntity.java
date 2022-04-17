@@ -10,8 +10,8 @@ import java.time.Instant;
 
 @Entity
 @Data
-@Table(name = "price_history")
-public class PriceHistoryEntity {
+@Table(name = "stock_history")
+public class StockHistoryEntity {
   @Id
   private long id;
   private long stockId;

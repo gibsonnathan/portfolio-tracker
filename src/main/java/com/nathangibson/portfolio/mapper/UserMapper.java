@@ -10,6 +10,7 @@ public class UserMapper {
   public User mapUserEntityToUser(UserEntity userEntity) {
     User user = new User();
     user.setUsername(userEntity.getUsername());
+    user.setId(userEntity.getId());
     return user;
   }
 }

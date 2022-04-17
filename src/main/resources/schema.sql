@@ -6,7 +6,7 @@ CREATE TABLE stocks (
    PRIMARY KEY(id)
 );
 
-CREATE TABLE price_history (
+CREATE TABLE stock_history (
     id IDENTITY NOT NULL AUTO_INCREMENT,
     stock_id INT NOT NULL,
     ts TIMESTAMP NOT NULL,
@@ -31,6 +31,7 @@ CREATE TABLE transactions(
     user_id INT NOT NULL,
     stock_id INT NOT NULL,
     quantity NUMERIC NOT NULL,
+    price NUMERIC NOT NULL,
     ts TIMESTAMP NOT NULL,
     row_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     row_modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

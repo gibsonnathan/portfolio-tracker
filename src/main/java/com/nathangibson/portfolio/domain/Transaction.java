@@ -7,7 +7,8 @@ import java.time.Instant;
 @Data
 public class Transaction {
   private String type;
-  private Stock stock;
+  private long stockId;
   private double quantity;
   private Instant timestamp;
+  private double price;
 }

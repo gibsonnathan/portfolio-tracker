@@ -20,4 +20,5 @@ public class TransactionEntity {
   @Column(name = "ts")
   private Instant timestamp;
   private String type;
+  private double price;
 }
